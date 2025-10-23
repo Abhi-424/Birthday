@@ -4,268 +4,602 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="title" content="Happy Birthday Website 2.0 | Aoudumber Bade">
-    <meta name="github" content="https://github.com/Aoudumber-Bade">
-    <title>Mutya Birthday</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link
-        href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;700&family=Poppins:wght@400;600&display=swap"
-        rel="stylesheet">
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
-        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <title>Happy Birthday! - Classic Indian Style</title>
+    <link href="https://fonts.googleapis.com/css2?family=Aladin&family=Courgette&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #ff3399, #6600cc, #ffcc00);
+            overflow-x: hidden;
+            min-height: 100vh;
+            color: gold;
+            font-family: 'Aladin', cursive;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            width: 100%;
+            position: relative;
+            z-index: 2;
+            text-align: center;
+        }
+
+        /* Header Styles */
+        .header {
+            text-align: center;
+            padding: 30px 0;
+            position: relative;
+            animation: colorChange 8s infinite alternate;
+        }
+
+        .title {
+            font-size: 4.5rem;
+            text-shadow: 3px 3px 0 #ff00ff, 6px 6px 0 #00ffff;
+            margin-bottom: 20px;
+            background: linear-gradient(to right, gold, #ff3399, #33ccff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: titleGlow 2s infinite alternate;
+        }
+
+        .subtitle {
+            font-size: 2.2rem;
+            text-shadow: 2px 2px 0 #ff00ff;
+            margin-bottom: 10px;
+        }
+
+        /* Flower Canvas Container */
+        .flower-container {
+            position: relative;
+            width: 600px;
+            height: 600px;
+            margin: 20px auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #flowerCanvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 5;
+        }
+
+        .friend-photo-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 10;
+            width: 200px;
+            height: 200px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .friend-photo {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 8px solid gold;
+            box-shadow: 0 0 30px #ffcc00;
+            opacity: 0;
+            transition: opacity 2s;
+        }
+
+        .friend-name {
+            font-size: 2.5rem;
+            color: #ffcc00;
+            text-shadow: 2px 2px 0 #ff0066;
+            margin-top: 20px;
+            opacity: 0;
+            transition: opacity 2s;
+        }
+
+        /* Main Content */
+        .main-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .message-box {
+            flex: 2;
+            min-width: 300px;
+            padding: 30px;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 20px;
+            box-shadow: 0 0 30px #00ffff;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .message-title {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 20px;
+            color: #33ccff;
+            text-shadow: 2px 2px 0 #6600ff;
+        }
+
+        .message {
+            font-size: 1.5rem;
+            line-height: 1.6;
+            text-align: justify;
+            color: white;
+            text-shadow: 1px 1px 0 #ff0066;
+            font-family: 'Courgette', cursive;
+        }
+
+        /* Effects */
+        .floating-hearts,
+        .floating-stars {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .heart,
+        .star {
+            position: absolute;
+            font-size: 2rem;
+            opacity: 0.7;
+            animation: float 15s infinite linear;
+        }
+
+        .heart {
+            color: #ff0066;
+        }
+
+        .star {
+            color: gold;
+        }
+
+        .lens-flare {
+            position: fixed;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0) 70%);
+            pointer-events: none;
+            animation: flareMove 10s infinite linear;
+            z-index: 1;
+        }
+
+        /* Buttons */
+        .button-container {
+            text-align: center;
+            margin: 40px 0;
+        }
+
+        .effect-button {
+            background: linear-gradient(to bottom, #ff0066, #6600ff);
+            border: 3px solid gold;
+            color: white;
+            font-size: 1.5rem;
+            padding: 15px 30px;
+            margin: 0 10px;
+            border-radius: 50px;
+            cursor: pointer;
+            text-shadow: 1px 1px 0 #000;
+            box-shadow: 0 0 20px #ff00ff;
+            transition: all 0.3s;
+            font-family: 'Aladin', cursive;
+        }
+
+        .effect-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 30px #00ffff;
+        }
+
+        /* Petal effects */
+        .petal {
+            position: fixed;
+            width: 30px;
+            height: 30px;
+            background: radial-gradient(circle, #ff3399, #ff0066);
+            border-radius: 50% 0 50% 50%;
+            transform: rotate(45deg);
+            opacity: 0;
+            animation: fall 10s linear infinite;
+            z-index: 1;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes colorChange {
+            0% {
+                filter: hue-rotate(0deg);
+            }
+
+            100% {
+                filter: hue-rotate(360deg);
+            }
+        }
+
+        @keyframes titleGlow {
+            0% {
+                text-shadow: 3px 3px 0 #ff00ff, 6px 6px 0 #00ffff;
+            }
+
+            100% {
+                text-shadow: 3px 3px 20px #ff00ff, 6px 6px 20px #00ffff;
+            }
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+            }
+
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+            }
+        }
+
+        @keyframes flareMove {
+            0% {
+                top: 10%;
+                left: 10%;
+            }
+
+            25% {
+                top: 60%;
+                left: 80%;
+            }
+
+            50% {
+                top: 30%;
+                left: 20%;
+            }
+
+            75% {
+                top: 80%;
+                left: 60%;
+            }
+
+            100% {
+                top: 10%;
+                left: 10%;
+            }
+        }
+
+        @keyframes fall {
+            0% {
+                top: -50px;
+                opacity: 1;
+                transform: rotate(45deg) translateX(0);
+            }
+
+            100% {
+                top: 100vh;
+                opacity: 0;
+                transform: rotate(45deg) translateX(100px);
+            }
+        }
+
+        /* Media Queries */
+        @media (max-width: 768px) {
+            .title {
+                font-size: 2.8rem;
+            }
+
+            .subtitle {
+                font-size: 1.8rem;
+            }
+
+            .flower-container {
+                width: 90vw;
+                height: 90vw;
+            }
+
+            .friend-photo-container {
+                width: 150px;
+                height: 150px;
+            }
+
+            .friend-name {
+                font-size: 2rem;
+            }
+
+            .message-title {
+                font-size: 2rem;
+            }
+
+            .message {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
 </head>
 
 <body>
-    <div id="wrapper">
-        <div class="flag__birthday">
-            <img src="./images/1.png" alt="" width="350" class="flag__left">
-            <img src="./images/1.png" alt="" width="350" class="flag__right">
-        </div>
-        <div class="content">
-            <div class="left">
-                <div class="title">
-                    <h1 class="happy">
-                        <span style="--t: 4s;">H</span>
-                        <span style="--t: 4.2s;">a</span>
-                        <span style="--t: 4.4s;">p</span>
-                        <span style="--t: 4.6s;">p</span>
-                        <span style="--t: 4.8s;">y</span>
-                    </h1>
-                    <h1 class="birthday">
-                        <span style="--t: 5s;">B</span>
-                        <span style="--t: 5.2s;">i</span>
-                        <span style="--t: 5.4s;">r</span>
-                        <span style="--t: 5.6s;">t</span>
-                        <span style="--t: 5.8s;">h</span>
-                        <span style="--t: 6s;">d</span>
-                        <span style="--t: 6.2s;">a</span>
-                        <span style="--t: 6.4s;">y</span>
-                    </h1>
-                    <div class="hat">
-                        <img src="./images/hat.png" alt="" width="130">
-                    </div>
-                </div>
-                <div class="date__of__birth">
-                    <span></span>
-                </div>
-                <div class="btn">
-                    <button id="btn__letter">
-                        <div class="mail">
-                            Click Here to wish me
-                            <i class="fa-regular fa-envelope"></i>
-                        </div>
-                    </button>
+    <div class="container">
+        <header class="header">
+            <h1 class="title">HAPPY BIRTHDAY!</h1>
+            <h2 class="subtitle">A Special Celebration Just For You!</h2>
+        </header>
 
-                </div>
+        <div class="flower-container">
+            <canvas id="flowerCanvas"></canvas>
+            <div class="friend-photo-container">
+                <img src="mutya.jpg"
+                    alt="Your Friend" class="friend-photo" id="friendPhoto">
             </div>
-            <div class="right">
-                <div class="box__account">
-                    <div class="image">
-                        <img src="mutya.jpg" alt="">
-                    </div>
-                    <div class="name">
-                        <i class="fa-solid fa-heart"></i>
-                        <span>Dear Mutya🤓</span>
-                        <i class="fa-solid fa-heart"></i>
-                    </div>
-                    <div class="balloon_one">
-                        <img width="100px" src="./images/balloon1.png" alt="">
-                    </div>
-                    <div class="balloon_two">
-                        <img width="100px" src="./images/balloon2.png" alt="">
-                    </div>
-                </div>
-                <div class="cricle">
-                    <div class="text__cricle">
-                        <span style="--i: 1;">h</span>
-                        <span style="--i: 2;">a</span>
-                        <span style="--i: 3;">p</span>
-                        <span style="--i: 4;">p</span>
-                        <span style="--i: 5;">y</span>
-                        <span style="--i: 6;">-</span>
-                        <span style="--i: 7;">b</span>
-                        <span style="--i: 8;">i</span>
-                        <span style="--i: 9;">r</span>
-                        <span style="--i: 10;">t</span>
-                        <span style="--i: 11;">h</span>
-                        <span style="--i: 12;">d</span>
-                        <span style="--i: 13;">a</span>
-                        <span style="--i: 14;">y</span>
-                        <span style="--i: 15;">-</span>
-                    </div>
-                    <i class="fa-solid fa-heart"></i>
+            <h2 class="friend-name" id="friendName">Priya Sharma</h2>
+        </div>
+
+        <div class="main-content">
+            <div class="message-box">
+                <h2 class="message-title">A Heartfelt Birthday Message</h2>
+                <div class="message">
+                    <p>Dear Priya,</p>
+                    <p>On this wonderful day, I want to wish you the happiest of birthdays! Just like this beautiful
+                        flower that blooms to reveal your smiling face, may your life continue to blossom with joy,
+                        success, and happiness.</p>
+                    <p>You bring so much light and positivity to everyone around you. May this year be filled with
+                        amazing adventures, cherished moments, and all the love you deserve.</p>
+                    <p>Wishing you health, prosperity, and countless reasons to smile today and always!</p>
+                    <p>With lots of love and best wishes,</p>
+                    <p>Your Friend</p>
                 </div>
             </div>
         </div>
-        <div class="decorate_star star1" style="--t: 15s;"></div>
-        <div class="decorate_star star2" style="--t: 15.2s;"></div>
-        <div class="decorate_star star3" style="--t: 15.4s;"></div>
-        <div class="decorate_star star4" style="--t: 15.6s;"></div>
-        <div class="decorate_star star5" style="--t: 15.8s;"></div>
-        <div class="decorate_flower--one" style="--t: 15s;">
-            <img width="20" src="./images/decorate_flower.png" alt="">
-        </div>
-        <div class="decorate_flower--two" style="--t: 15.3s;">
-            <img width="20" src="./images/decorate_flower.png" alt="">
-        </div>
-        <div class="decorate_flower--three" style="--t: 15.6s;">
-            <img width="20" src="./images/decorate_flower.png" alt="">
-        </div>
-        <div class="decorate_bottom">
-            <img src="./images/decorate.png" alt="" width="100">
-        </div>
-        <div class="smiley__icon">
-            <img src="./images/smiley_icon.png" alt="" width="100">
-        </div>
 
-
-        <div class="boxMail">
-            <i class="fa-solid fa-xmark"></i>
-            <div class="boxMail-container">
-                <div class="card1">
-                    <div class="userImg">
-                        <img src="mutya.jpg" alt="">
-                    </div>
-                    <h4 class="username">To: Mutya💖<span class="underline"></span></h4>
-
-                    <h3>Happy Birthday</h3>
-                    <div class="imageCute">
-                        <img src="cute1.png" alt="">
-                    </div>
-                </div>
-                <div class="card2">
-                    <div class="card2-content">
-                        <h3>To You!</h3>
-                        <h2>Happy Birthday, Mutya! 🥳🎂
-
-                            Congrats on leveling up in the game of life… even though you’re still the same clown we all
-                            know and love 🤡. Seriously, how do you manage to trip over literally nothing and still call
-                            it “talent”?
-
-                            May your cake be bigger than your brain, your Wi-Fi faster than your jokes, and your life
-                            slightly less chaotic than your WhatsApp groups 😎.
-
-                            Remember, age is just a number… but in your case, it’s proof that chaos lasts longer than we
-                            thought 😂. Keep being your ridiculous, meme-worthy self, because the world needs
-                            professional clowns like you!
-
-                            Happy Birthday, legend 🎈🎂—may your selfies always be blurry and your snacks never
-                            disappear (unless I eat them first)
-                        </h2>
-
-                        <div class="imageCute2">
-                            <img src="cute2.png" alt="">
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="button-container">
+            <button class="effect-button" id="musicBtn">Play Celebration Music</button>
+            <button class="effect-button" id="replayBtn">Replay Flower Effect</button>
         </div>
     </div>
 
+    <div class="floating-hearts" id="heartsContainer"></div>
+    <div class="floating-stars" id="starsContainer"></div>
+    <div class="lens-flare" id="lensFlare"></div>
+
+    <audio id="birthdayMusic" loop>
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        // Create floating hearts and stars
+        const heartsContainer = document.getElementById('heartsContainer');
+        const starsContainer = document.getElementById('starsContainer');
+
+        for (let i = 0; i < 25; i++) {
+            const heart = document.createElement('div');
+            heart.className = 'heart';
+            heart.innerHTML = '♥';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDelay = Math.random() * 15 + 's';
+            heart.style.fontSize = (Math.random() * 20 + 20) + 'px';
+            heartsContainer.appendChild(heart);
+
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.innerHTML = '★';
+            star.style.left = Math.random() * 100 + 'vw';
+            star.style.animationDelay = Math.random() * 15 + 's';
+            star.style.fontSize = (Math.random() * 20 + 20) + 'px';
+            starsContainer.appendChild(star);
+
+            // Create falling petals
+            if (i < 15) {
+                const petal = document.createElement('div');
+                petal.className = 'petal';
+                petal.style.left = Math.random() * 100 + 'vw';
+                petal.style.animationDelay = Math.random() * 10 + 's';
+                document.body.appendChild(petal);
+            }
+        }
+
+        // Music player
+        const musicBtn = document.getElementById('musicBtn');
+        const birthdayMusic = document.getElementById('birthdayMusic');
+        let isPlaying = false;
+
+        musicBtn.addEventListener('click', function () {
+            if (isPlaying) {
+                birthdayMusic.pause();
+                musicBtn.textContent = 'Play Celebration Music';
+            } else {
+                birthdayMusic.play();
+                musicBtn.textContent = 'Pause Music';
+            }
+            isPlaying = !isPlaying;
+        });
+
+        // Flower animation using Canvas
+        const canvas = document.getElementById('flowerCanvas');
+        const ctx = canvas.getContext('2d');
+        const friendPhoto = document.getElementById('friendPhoto');
+        const friendName = document.getElementById('friendName');
+
+        // Set canvas size
+        canvas.width = 600;
+        canvas.height = 600;
+
+        // Flower parameters
+        const centerX = canvas.width / 2;
+        const centerY = canvas.height / 2;
+        let bloomProgress = 0;
+        let animationId;
+
+        // Colors for the flower
+        const petalColors = [
+            '#FF69B4', '#FF1493', '#FF00FF', '#DB7093', '#FFB6C1'
+        ];
+
+        // Draw the flower
+        function drawFlower() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Draw stem
+            ctx.beginPath();
+            ctx.moveTo(centerX, centerY + 50);
+            ctx.lineTo(centerX, centerY + 200 * bloomProgress);
+            ctx.strokeStyle = '#228B22';
+            ctx.lineWidth = 10;
+            ctx.stroke();
+
+            // Draw leaves
+            if (bloomProgress > 0.3) {
+                ctx.beginPath();
+                ctx.moveTo(centerX, centerY + 120);
+                ctx.quadraticCurveTo(centerX - 60, centerY + 100, centerX - 40, centerY + 150);
+                ctx.strokeStyle = '#32CD32';
+                ctx.lineWidth = 8;
+                ctx.stroke();
+
+                ctx.beginPath();
+                ctx.moveTo(centerX, centerY + 120);
+                ctx.quadraticCurveTo(centerX + 60, centerY + 100, centerX + 40, centerY + 150);
+                ctx.stroke();
+            }
+
+            // Draw petals
+            const petalCount = 8;
+            const maxPetalLength = 120 * bloomProgress;
+            const maxPetalWidth = 60 * bloomProgress;
+
+            for (let i = 0; i < petalCount; i++) {
+                const angle = (i / petalCount) * Math.PI * 2;
+                const petalColor = petalColors[i % petalColors.length];
+
+                // Outer petals
+                ctx.save();
+                ctx.translate(centerX, centerY);
+                ctx.rotate(angle);
+
+                ctx.beginPath();
+                ctx.ellipse(0, -maxPetalLength * 0.3, maxPetalWidth, maxPetalLength, 0, 0, Math.PI * 2);
+                ctx.fillStyle = petalColor;
+                ctx.fill();
+
+                ctx.restore();
+            }
+
+            // Draw inner petals when bloom is more advanced
+            if (bloomProgress > 0.5) {
+                const innerPetalCount = 6;
+                const innerMaxPetalLength = 80 * (bloomProgress - 0.5) * 2;
+                const innerMaxPetalWidth = 40 * (bloomProgress - 0.5) * 2;
+
+                for (let i = 0; i < innerPetalCount; i++) {
+                    const angle = (i / innerPetalCount) * Math.PI * 2;
+                    const petalColor = petalColors[(i + 2) % petalColors.length];
+
+                    ctx.save();
+                    ctx.translate(centerX, centerY);
+                    ctx.rotate(angle);
+
+                    ctx.beginPath();
+                    ctx.ellipse(0, -innerMaxPetalLength * 0.2, innerMaxPetalWidth, innerMaxPetalLength, 0, 0, Math.PI * 2);
+                    ctx.fillStyle = petalColor;
+                    ctx.fill();
+
+                    ctx.restore();
+                }
+            }
+
+            // Draw flower center when bloom is complete
+            if (bloomProgress > 0.8) {
+                const centerRadius = 40 * (bloomProgress - 0.8) * 5;
+                ctx.beginPath();
+                ctx.arc(centerX, centerY, centerRadius, 0, Math.PI * 2);
+                ctx.fillStyle = '#FFD700';
+                ctx.fill();
+
+                // Draw center details
+                ctx.beginPath();
+                ctx.arc(centerX, centerY, centerRadius * 0.7, 0, Math.PI * 2);
+                ctx.fillStyle = '#FFA500';
+                ctx.fill();
+            }
+
+            // Show friend photo when bloom is complete
+            if (bloomProgress >= 1) {
+                friendPhoto.style.opacity = 1;
+                friendName.style.opacity = 1;
+                cancelAnimationFrame(animationId);
+            }
+        }
+
+        // Animate the flower bloom
+        function animateFlower() {
+            bloomProgress += 0.01;
+            if (bloomProgress > 1) bloomProgress = 1;
+
+            drawFlower();
+
+            if (bloomProgress < 1) {
+                animationId = requestAnimationFrame(animateFlower);
+            }
+        }
+
+        // Start the flower animation
+        setTimeout(() => {
+            animateFlower();
+        }, 1000);
+
+        // Replay flower animation
+        const replayBtn = document.getElementById('replayBtn');
+
+        replayBtn.addEventListener('click', function () {
+            // Reset
+            bloomProgress = 0;
+            friendPhoto.style.opacity = 0;
+            friendName.style.opacity = 0;
+
+            // Restart animation
+            cancelAnimationFrame(animationId);
+            animateFlower();
+        });
+
+        // Lens flare follows mouse
+        document.addEventListener('mousemove', function (e) {
+            const flare = document.getElementById('lensFlare');
+            flare.style.left = (e.pageX - 100) + 'px';
+            flare.style.top = (e.pageY - 100) + 'px';
+        });
+
+        // Auto-start music after a delay
+        setTimeout(() => {
+            birthdayMusic.play();
+            musicBtn.textContent = 'Pause Music';
+            isPlaying = true;
+        }, 3000);
+    </script>
 </body>
-<script>
-    let datetxt = "23 October";
-    let datatxtletter = "My love. You are a very special girl. I always silently thank you for coming into my life. Today, I wish you all the best, lots of health, and lots of joy. I always hope we will celebrate many more birthdays like this together. Happy birthday to you.💕";
-    let titleLetter = "To you";
-    let charArrDate = datetxt.split('');
-    let charArrDateLetter = datatxtletter.split('');
-    let charArrTitle = titleLetter.split('');
-    let currentIndex = 0;
-    let currentIndexLetter = 0;
-    let currentIndexTitle = 0;
-    let date__of__birth = document.querySelector(".date__of__birth span");
-    let text__letter = document.querySelector(".text__letter p");
-    setTimeout(function () {
-        timeDatetxt = setInterval(function () {
-            if (currentIndex < charArrDate.length) {
-                date__of__birth.textContent += charArrDate[currentIndex];
-                currentIndex++;
-            }
-            else {
-                let i = document.createElement("i");
-                i.className = "fa-solid fa-star"
-                document.querySelector(".date__of__birth").prepend(i)
-                document.querySelector(".date__of__birth").appendChild(i.cloneNode(true))
-                clearInterval(timeDatetxt)
-            }
-        }, 100)
-    }, 12000)
-
-    var intervalContent;
-    var intervalTitle;
-    $("#btn__letter").on("click", function () {
-        $(".box__letter").slideDown()
-        setTimeout(function () {
-            $(".letter__border").slideDown();
-        }, 0.100)
-        setTimeout(function () {
-            intervalTitle = setInterval(function () {
-                if (currentIndexTitle < charArrTitle.length) {
-                    document.querySelector(".title__letter").textContent += charArrTitle[currentIndexTitle];
-                    let i = document.createElement("i");
-                    i.className = "fa-solid fa-heart"
-                    document.querySelector(".title__letter").appendChild(i)
-                    currentIndexTitle++;
-                }
-                else {
-                    clearInterval(intervalTitle)
-                }
-            }, 100)
-        }, 2000)
-        setTimeout(function () {
-            document.querySelector("#heart__letter").classList.add("animationOp");
-            document.querySelector(".love__img").classList.add("animationOp");
-            document.querySelector("#mewmew").classList.add("animationOp");
-        }, 2800)
-        setTimeout(function () {
-            document.querySelectorAll(".heart").forEach((item) => {
-                item.classList.add("animation")
-            })
-        }, 3500)
-        setTimeout(function () {
-            intervalContent = setInterval(function () {
-                if (currentIndexLetter < charArrDateLetter.length) {
-                    text__letter.textContent += charArrDateLetter[currentIndexLetter];
-                    currentIndexLetter++;
-                }
-                else {
-                    clearInterval(intervalContent)
-                }
-            }, 50)
-        }, 6000)
-    })
-    $(".close").on("click", function () {
-        clearInterval(intervalContent)
-        document.querySelector(".title__letter").textContent = "";
-        text__letter.textContent = "";
-        currentIndexLetter = 0
-        currentIndexTitle = 0
-        document.querySelector("#heart__letter").classList.remove("animationOp");
-        document.querySelector(".love__img").classList.remove("animationOp");
-        document.querySelector("#mewmew").classList.remove("animationOp");
-        document.querySelectorAll(".heart").forEach((item) => {
-            item.classList.remove("animation")
-        })
-        $(".box__letter").slideUp();
-        $(".letter__border").slideUp();
-    })
-
-
-
-    let mailBox = document.querySelector('.mail')
-    let boxmail = document.querySelector('.boxMail')
-    var close = document.querySelector('.fa-xmark')
-    mailBox.onclick = function () {
-        mailBox.classList.toggle('active')
-        boxmail.classList.add('active')
-    }
-
-    close.addEventListener('click', function () {
-        boxmail.classList.remove('active')
-    })
-</script>
 
 </html>
